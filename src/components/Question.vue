@@ -1,6 +1,6 @@
 <template>
     <div class="question">
-        {{ question.question }}
+        <h3>{{ question.question }}</h3>
         <ul>
             <li v-for="(choice, index) in question.choices" :key="choice">
                 <label :for="`answer${index}`">

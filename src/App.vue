@@ -20,9 +20,9 @@
 
   onMounted(() => {
     fetch('./quiz.json')
-      .then(data => {
-        if (data.ok) {
-          return data.json()
+      .then(r => {
+        if (r.ok) {
+          return r.json()
         }
         throw new Error('Impossible de récupérer le JSON')
       })
@@ -30,7 +30,7 @@
         quiz.value = data
         state.value = 'idle'
       })
-      .catch(error => {
+      .catch(e => {
         state.value = 'error'
       })
   })
