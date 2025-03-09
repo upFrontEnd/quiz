@@ -1,4 +1,11 @@
-# quiz
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a417de85-61fe-4dcc-88dc-478f571602b0/deploy-status)](https://app.netlify.com/sites/quiz-in-vue/deploys)
+
+# Quiz
+
+
+<a href="https://quiz-in-vue.netlify.app/p" target="_blank">
+    <img src="./img/screen.jpg" alt="Project preview">
+</a>
 
 This template should help get you started developing with Vue 3 in Vite.
 
