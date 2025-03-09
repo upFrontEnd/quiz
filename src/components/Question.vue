@@ -2,19 +2,25 @@
     <div class="question">
         <h3>{{ question.question }}</h3>
         <ul>
-            <li v-for="(choice, index) in question.choices" :key="choice">
-                <label :for="`answer${index}`">
-                    <input type="radio" name="answer" :id="`answer${index}`" v-model="answer" :value="choice">
-                    {{ choice }}
-                </label>
+            <li v-for="(choice, index) in randomChoices" :key="choice">
+                <Answer 
+                    :id="`answer${index}`"
+                    :disabled="hasAnswer"
+                    :value="choice"
+                    @change="onAnswer"
+                    v-model="answer"
+                    :correctAnswer="question.correct_answer"
+                />
             </li>
         </ul>
-        <button :disabled="!hasAnswer" @click="emits('answer', answer)">Question suivante</button>
+        <!-- <button :disabled="!hasAnswer" @click="emits('answer', answer)">Question suivante</button> -->
     </div>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+    import { shuffleArray } from '@/functions/array'
+    import { computed, onMounted, onUnmounted, ref } from 'vue'
+    import Answer from './Answer.vue'
 
     const props = defineProps({
         question: Object
@@ -22,6 +28,27 @@ import { computed, ref } from 'vue'
     const emits = defineEmits(['answer'])
     const answer = ref(null)
     const hasAnswer = computed(() => answer.value !== null)
+    const randomChoices = computed(() => shuffleArray(props.question.choices))
+    let timer 
+
+    const onAnswer = () => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+            emits('answer', answer.value)
+        }, 1500)
+    }
+    
+
+    onMounted(() => {
+        timer = setTimeout(() => {
+            answer.value = ''
+            onAnswer()
+        }, 3000)
+    })
+
+    onUnmounted(() => {
+        clearTimeout(timer)
+    })
 </script>
 
 <style>

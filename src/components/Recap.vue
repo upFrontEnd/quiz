@@ -1,11 +1,7 @@
 <template>
     <h1>Recap</h1>
-    <p>
-        {{ hasWon ? quiz.success_message  : quiz.failure_message }}
-    </p>
-    <p>
-        Score : {{ score }}/{{ quiz.questions.length }}
-    </p>
+    <p>{{ hasWon ? quiz.success_message  : quiz.failure_message }}</p>
+    <p>Score : {{ score }}/{{ quiz.questions.length }}</p>
 </template>
 
 <script setup>
